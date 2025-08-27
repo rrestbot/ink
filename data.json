@@ -1,0 +1,6 @@
+[
+  {"type":"text", "content":"হ্যালো! এই মেসেজ টেস্ট হচ্ছে।"},
+  {"type":"link", "content":"https://www.google.com"},
+  {"type":"image", "content":"https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg"},
+  {"type":"video", "content":"https://www.w3schools.com/html/mov_bbb.mp4"}
+]
