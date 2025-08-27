@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Private Site</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+      background: #f9f9f9;
+    }
+  </style>
+  <script>
+    async function checkPassword() {
+      var password = document.getElementById("password").value;
+      if(password === "infoword") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("content").style.display = "block";
+        loadData();
+      } else {
+        alert("❌ ভুল পাসওয়ার্ড!");
+      }
+    }
+
+    async function loadData() {
+      let response = await fetch("data.json");
+      let items = await response.json();
+      let container = document.getElementById("items");
+
+      items.forEach(item => {
+        let div = document.createElement("div");
+        div.className = "box";
+
+        if(item.type === "text") {
+          div.innerText = item.content;
+        } 
+        else if(item.type === "link") {
+          div.innerHTML = `<a href="${item.content}" target="_blank">${item.content}</a>`;
+        } 
+        else if(item.type === "image") {
+          div.innerHTML = `<img src="${item.content}" width="300">`;
+        } 
+        else if(item.type === "video") {
+          div.innerHTML = `<video controls width="400"><source src="${item.content}" type="video/mp4"></video>`;
+        }
+
+        container.appendChild(div);
+      });
+    }
+  </script>
+</head>
+<body>
+  <div id="login">
+    <h2>🔐 লগইন করুন</h2>
+    <input type="password" id="password" placeholder="পাসওয়ার্ড দিন">
+    <button onclick="checkPassword()">লগইন</button>
+  </div>
+
+  <div id="content" style="display:none;">
+    <h1>🎉 স্বাগতম!</h1>
+    <div id="items"></div>
+  </div>
+</body>
+</html>
